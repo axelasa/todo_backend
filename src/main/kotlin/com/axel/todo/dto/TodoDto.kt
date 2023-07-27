@@ -4,6 +4,7 @@ import com.axel.todo.entities.TodoEntity
 import java.util.Date
 
 data class TodoDto (
+    val id:Long,
     val title:String,
     val notes:String,
     val createdAt:Date,
@@ -12,7 +13,7 @@ data class TodoDto (
 ){
     companion object{
         fun fromTodoEntity(s: TodoEntity):TodoDto{
-            return TodoDto(s.title,s.notes,s.createdAt,s.updatedAt,s.user.username)
+            return TodoDto(s.id!!,s.title,s.notes,s.createdAt,s.updatedAt,s.user.username)
         }
     }
 }
