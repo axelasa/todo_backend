@@ -1,6 +1,5 @@
 package com.axel.todo.model
 
-import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 
 data class UpdateTodoModel(
