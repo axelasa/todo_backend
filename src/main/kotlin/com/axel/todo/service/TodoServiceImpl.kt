@@ -74,4 +74,8 @@ class TodoServiceImpl(private var todoRepo:TodoRepo, private val userService: Us
 
         return todoRepo.save(updateExistingTodo)
     }
+
+    override fun deleteTodo(id: Long): Optional<TodoEntity> {
+        return todoRepo.deleteById(id)
+    }
 }

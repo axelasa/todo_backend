@@ -1,22 +1,17 @@
 package com.axel.todo.controller
 
 import com.axel.todo.dto.TodoDto
-import com.axel.todo.dto.UserDto
 import com.axel.todo.entities.TodoEntity
 import com.axel.todo.globalService.GlobalService.Companion.todoService
-import com.axel.todo.globalService.GlobalService.Companion.userService
 import com.axel.todo.model.ApiResponse
 import com.axel.todo.model.TodoModel
 import com.axel.todo.model.UpdateTodoModel
-import com.axel.todo.specification.TodoSpecification
 import jakarta.validation.Valid
-import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import kotlin.streams.toList
 
 @RestController
 @RequestMapping("task")
@@ -76,4 +71,14 @@ class TodoController {
         return ResponseEntity(result,HttpStatus.OK)
     }
 
+    @DeleteMapping("delete")
+    fun deleteTodo(@PathVariable id:Long) :ResponseEntity<Any>{
+        val existingTodo =  todoService.deleteTodo(id)
+        if (existingTodo.isEmpty){
+            val response =ApiResponse(HttpStatus.NOT_FOUND.value(),"Task Does Not Exist",null)
+            return ResponseEntity(response,HttpStatus.NOT_FOUND)
+        }
+        val result = ApiResponse(HttpStatus.OK.value(),"Task Deleted SucessFully",TodoDto.fromTodoEntity(existingTodo.get()))
+        return ResponseEntity(result,HttpStatus.OK)
+    }
 }

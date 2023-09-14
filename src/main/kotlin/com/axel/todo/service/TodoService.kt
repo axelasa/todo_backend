@@ -21,5 +21,6 @@ interface TodoService {
     fun getTodosByUsername(username: String, pageable: Pageable):Page<TodoEntity>
     fun getAllTodos():List<TodoEntity>
    fun updateTodo(@Valid updateTodo:UpdateTodoModel):TodoEntity
+   fun deleteTodo(id:Long):Optional<TodoEntity>
 
 }

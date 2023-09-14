@@ -18,4 +18,5 @@ interface TodoRepo :JpaRepository<TodoEntity,Int>, JpaSpecificationExecutor<Todo
 
     fun findByUser_Username(username: String,pageable: Pageable):Page<TodoEntity>
     fun findById(id: Long):Optional<TodoEntity>
+    fun deleteById(id: Long):Optional<TodoEntity>
 }
